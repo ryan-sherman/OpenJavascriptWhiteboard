@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<title>WhiteboardPrototype</title></title>
+  <style type="text/css">
+    body { font: 13px/140% Arial, sans-serif; background: black; color: white; }
+    canvas {id: "board"; top: 0; left: 0;width: 1200px; height: 1080px;border:1px solid #d3d3d3; background: white;}
+        </style>
+	</head>
+	<body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+		<script src="js/three.min.js"></script>
+		<script>
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 750, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+			var cube = new THREE.Mesh( geometry, material );
+			scene.add( cube );
+
+			camera.position.z = 20;
+
+			var render = function () {
+				requestAnimationFrame( render );
+				renderer.render(scene, camera);
+			};
+			render();
+			
+        var socket = io.connect();
+        socket.on('connect', function () {
+        });
+        socket.on('message', function (msg) {
+        });
+        socket.on('painting', function (coords) {
+              console.log(coords.x + "," + coords.y)
+			      var temp = new THREE.Mesh( geometry, material );
+			      temp.position.x = (coords.x)/1000;
+			      temp.position.y = (-1*coords.y)/1000;
+      			scene.add( temp );
+        });
+        var dx = 0;
+        document.onmousedown = function(event){
+          socket.emit('paint', { x: event.layerX, y: event.layerY });
+          camera.rotateOnAxis(new THREE.Vector3(0, 1, 0), dx);
+          camera.position.z += 1;
+          //dx += 0.005;
+        }
+		</script>
+	</body>
+</html>

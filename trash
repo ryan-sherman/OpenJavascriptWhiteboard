@@ -1,0 +1,104 @@
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+    
+  <style type="text/css">
+    body { font: 13px/140% Arial, sans-serif; background: black; color: white; }
+    canvas {; top: 0; left: 0;width: 1800px; height: 1080px;border:1px solid #d3d3d3; background: white;}
+        </style>
+        
+    <body>
+
+    </body>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    
+    <script>
+    
+    var canvas1 = document.createElement('canvas');
+    canvas1.id = 'board';
+    canvas1.setAttribute('width', '1800');
+    canvas1.setAttribute('height', '1080');
+    
+    document.body.appendChild(canvas1);
+    
+    var c = document.getElementById("board");
+    var ctx = canvas1.getContext("2d");
+    
+    
+  canvas = document.getElementByTagName("canvas")
+  gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl")
+
+
+
+    document.title = "Whiteboard Prototype";
+    
+    
+        var socket = io.connect();
+        socket.on('connect', function () {
+
+        });
+
+        socket.on('message', function (msg) {
+
+        });
+        socket.on('painting', function (coords) {
+              console.log(coords.x + "," + coords.y)
+              ctx.fillStyle = "#000000";
+              ctx.fillRect( coords.x, coords.y, 4, 4 );
+        });
+        
+        document.getElementById("board").onmousemove = function(event){
+          socket.emit('paint', { x: event.layerX, y: event.layerY });
+        }
+        
+        
+    </script>
+  </head>
+  
+  
+  
+  
+        var socket = io.connect();
+        socket.on('connect', function () {
+        });
+        socket.on('message', function (msg) {
+        });
+        socket.on('painting', function (coords) {
+              console.log(coords.x + "," + coords.y)
+
+        });
+        document.getElementById("board").onmousemove = function(event){
+          socket.emit('paint', { x: event.layerX, y: event.layerY });
+        }
+        
+        
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    
+    <script src="js/three.min.js"></script>
+    
+    <script>
+    document.title = "Whiteboard Prototype";
+    
+    //make the canvas
+    var canvas = document.createElement('canvas');
+    canvas.id = 'board';
+    canvas.setAttribute('width', '600');
+    canvas.setAttribute('height', '600');
+    
+    document.body.appendChild(canvas);
+    var gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    
+    
+  <style type="text/css">
+    body { font: 13px/140% Arial, sans-serif; background: black; color: white; }
+    canvas {; top: 0; left: 0;width: 1800px; height: 1080px;border:1px solid #d3d3d3; background: white;}
+        </style>
