@@ -1,8 +1,15 @@
+//////////////////////////////////////////////
+NOTE TO INTRO TO OPEN SOURCE GRADERS:
+
+** the new repo is at https://github.com/IanHuntress/draw **
+
+//////////////////////////////////////////////
+
+
 # OpenJavascriptWhiteboard
 A browser Whiteboard for the common people
 
-The new repository is here: [link](https://github.com/IanHuntress/draw.git)
-
+Try running node whiteboardServer.js
 
 + orbit.html is a test of controls
 + example.html is a test of three.js
