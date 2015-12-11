@@ -1,7 +1,8 @@
 # OpenJavascriptWhiteboard
 A browser Whiteboard for the common people
 
-Try running node whiteboardServer.js
+The new repository is here: [link](https://github.com/IanHuntress/draw.git)
+
 
 + orbit.html is a test of controls
 + example.html is a test of three.js
